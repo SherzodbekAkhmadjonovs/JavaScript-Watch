@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Clock</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,400);
+
+
+
+        *{
+            box-sizing: border-box;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            margin-top: -200px;
+            margin-left: -200px;
+            border-radius: 2px;
+            box-shadow: 1px 2px 10px 0px rgba(0,0,0,1);
+            background: black;
+            overflow: hidden;
+            background-image: url("bg.png") ;
+        }
+
+        .inner-container{
+            position: relative;
+            overflow: hidden;
+            height: 260px;
+            width: 260px;
+            background-color: #1a1a1a;
+            transform: translate(70px,70px);
+            -webkit-transform: translate(70px,70px);
+            -moz-transform: translate(70px,70px);
+            -ms-transform: translate(70px,70px);
+            -o-transform: translate(70px,70px);
+            border: 7px solid rgba(70, 70, 70, 0.774) ;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+        }
+
+
+        .outline3{
+            transform-origin:  center;
+            transform: rotate(270deg);
+            stroke-dashoffset: 723;
+            animation: dash 6s linear infinite;
+            -webkit-animation: dash 6s linear infinite;
+        }
+        @keyframes dash{
+            100%{
+                stroke-dashoffset:-723;
+            }
+
+        }
+
+        .outline2, .outline-big-lines{
+            transform-origin:  center;
+        }
+
+        /*Styling the inner text*/
+
+        .text{
+            font-family: 'Open Sans', Helvetica, sans-serif;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.87);
+            position: relative;
+            width: 100%;
+            height: 100%;
+            bottom: 260px;
+
+            word-spacing: 0.1em;
+        }
+
+        .date{
+        font-size: 0.75rem;
+        }
+
+        .time{
+            font-size: 2.6rem;
+            font-weight: 700;
+        }
+
+        i{
+            color: #981372;
+            margin-right: 0.2em;
+            transform: scale(0.9);
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.9);
+            -ms-transform: scale(0.9);
+            -o-transform: scale(0.9);
+            animation: beat 0.67s infinite;
+            -webkit-animation: beat 0.67s infinite;
+        }
+
+        .health, .health>div{
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        .health{
+            justify-content: space-between;
+            font-size: 0.75rem;
+        }
+
+        @keyframes beat{
+            20%{
+                transform: scale(1.25);
+                -webkit-transform: scale(1.25);
+                -moz-transform: scale(1.25);
+                -ms-transform: scale(1.25);
+                -o-transform: scale(1.25);
+        }
+        }
+        a{
+            text-decoration: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            color: #dbbebe;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="inner-container">
+            
+            <svg width="260px" height="260px">
+                <circle class="outline2"cx="124" cy="124" r="105" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="1 10"></circle>
+                <circle class="outline-big-lines"cx="124" cy="124" r="100" fill="none" stroke="#fff" stroke-width="15" stroke-dasharray="1 51.35"></circle>
+                <circle class="outline3" cx="136" cy="124" r="115" fill="none" stroke="#981372" stroke-width="3" stroke-dasharray="723" ></circle>
+            </svg>
+
+
+
+
+            <div class="text">
+                <div class="date">By <a href="https://mailto:sherzodbekakhamdjonov0604@gmail.com">Sherzodbek Akhmadjonov</a></div>
+                <div class="time"></div>
+                <div class="health">
+                    <div>
+                        <i class="far fa-heart fa-lg"></i>
+                        <div><a href="https://github.com/SherzodbekAkhmadjonovs">Github Page</a></div>
+                    </div>
+
+                </div>
+            </div>
+        
+        
+        </div>
+
+    </div>
+    <script>
+        function currentTime() {
+        var date = new Date(); /* creating object of Date class */
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var midday = "AM";
+        // midday = (hour >= 12) ? "PM" : "AM"; /* assigning AM/PM */
+        // hour = (hour == 0) ? 12 : ((hour > 12) ? (hour - 12): hour); /* assigning hour in 12-hour format */
+        hour = updateTime(hour);
+        min = updateTime(min);
+        sec = updateTime(sec);
+        document.querySelector(".time").innerText = hour + " : " + min; /* adding time to the div */
+        var t = setTimeout(currentTime, 1000); /* setting timer */
+        }
+    
+        function updateTime(k) { /* appending 0 before time elements if less than 10 */
+            if (k < 10) {
+            return "0" + k;
+            }
+            else {
+            return k;
+            }
+        }
+    
+    currentTime();
+    </script>
+</body>
+</html>
